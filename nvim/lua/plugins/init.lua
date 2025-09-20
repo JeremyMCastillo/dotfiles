@@ -107,11 +107,6 @@ return {
   {
     "ckipp01/nvim-jenkinsfile-linter",
     lazy = false,
-    config = function()
-      require("nvim-jenkinsfile-linter").setup {
-        -- configuration options here
-      }
-    end,
     dependencies = { "nvim-lua/plenary.nvim" },
   }
 }

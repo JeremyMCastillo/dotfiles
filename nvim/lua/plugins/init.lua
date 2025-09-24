@@ -23,16 +23,7 @@ return {
           "css-lsp",
           "lua-language-server",
           "pyright",
-        },
-        opts = {
-          ensure_installed = {
-            "black",
-            "pylint",
-            "html-lsp",
-            "css-lsp",
-            "lua-language-server",
-            "pyright",
-          },
+          "tsserver",
         },
       }
     end,

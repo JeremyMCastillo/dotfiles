@@ -99,5 +99,19 @@ return {
     "ckipp01/nvim-jenkinsfile-linter",
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "xiyaowong/transparent.nvim",
+    lazy = false,
+    config = function()
+      require("transparent").setup({
+        enable = true, -- boolean: enable transparent
+        extra_groups = { -- table/string: additional groups that should be clear_scheduled_display
+          "NormalFloat", "NvimTreeNormal", "NvimTreeNormalNC", "TelescopeNormal",
+          "TelescopeBorder", "TelescopePromptBorder", "TelescopeResultsBorder",
+          "TelescopePreviewBorder", "WhichKeyFloat", "WhichKeyBorder",
+        },
+      })
+    end,
   }
 }

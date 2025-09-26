@@ -113,5 +113,29 @@ return {
         },
       })
     end,
+  },
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+    config = function()
+      require("auto-session").setup()
+    end,
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    lazy = true,
+    version = "*",
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "D:\\Documents\\Notes",
+        },
+      }
+    }
   }
 }

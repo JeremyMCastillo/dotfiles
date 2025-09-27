@@ -11,6 +11,9 @@ return {
   },
   {
     "mason-org/mason.nvim",
+    opts = {
+      automatic_installation = true,
+    },
     config = function()
       require("mason").setup{
         ui = {
@@ -31,7 +34,13 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "mason-org/mason.nvim" },
+    opts = {
+      automatic_installation = true,
+      auto_install = true,
+    },
     config = function()
+      local lspconfig = require("lspconfig")
+      lspconfig.tsserver.setup({})
       require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers {
         function (server_name) -- default handler (optional)
@@ -57,6 +66,7 @@ return {
           null_ls.builtins.formatting.eslint,
           null_ls.builtins.formatting.csharpier,
           null_ls.builtins.formatting.markdownlint,
+          null_ls.builtins.formatting.tsserver,
           require("none-ls.diagnostics.eslint"),
         },
       }

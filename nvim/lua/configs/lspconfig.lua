@@ -1,24 +1,20 @@
 require("nvchad.configs.lspconfig").defaults()
+local lspconfig = require "lspconfig"
 
-local on_attach = require("nvchad.configs.lspconfig").on_attach
-local capabilities = require("nvchad.configs.lspconfig").capabilities
-local lspconfig = require("lspconfig")
+local servers = { "html", "cssls" }
 
-local servers = { "html", "cssls", "pyright", "tsserver", "lua_ls" }
+-- vim.lsp.config["omnisharp"] = {}
+vim.lsp.config["tsserver"] = {}
+
 vim.lsp.enable(servers)
+vim.lsp.enable "lua_la"
+vim.lsp.enable "omnisharp"
+vim.lsp.enable "pyright"
+vim.lsp.enable "ts_ls"
+--
+-- lspconfig.omnisharp.setup {}
+-- lspconfig.lua_ls.setup {}
+-- lspconfig.pyright.setup {}
+-- lspconfig.tsserver.setup {}
 
-for _, server in ipairs(servers) do
-  if lspconfig[server] then
-    lspconfig[server].setup {
-      on_attach = function (client, bufnr)
-        if client.name == "tsserver" or client.name == "typescript" then
-          client.server_capabilities.documentFormattingProvider = false
-        end
-        on_attach(client, bufnr)
-      end,
-      capabilities = capabilities,
-    }
-  end
-end
-
--- read :h vim.lsp.config for changing options of lsp servers 
+-- read :h vim.lsp.config for changing options of lsp servers

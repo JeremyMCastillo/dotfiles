@@ -7,7 +7,7 @@ return {
       -- Customize or remove this keymap to your liking
       "<leader>fm",
       function()
-        require("conform").format({ async = true })
+        require("conform").format { async = true }
       end,
       mode = "",
       desc = "Format buffer",
@@ -22,17 +22,27 @@ return {
       lua = { "lua_ls", "stylua" },
       python = { "isort", "black" },
       javascript = { "prettierd", "prettier", stop_after_first = true },
+      cs = { "csharpier" },
+      sh = { "shfmt" },
+      json = { "prettierd", "prettier", stop_after_first = true },
+      html = { "prettierd", "prettier", stop_after_first = true },
+      css = { "prettierd", "prettier", stop_after_first = true },
+      xml = { "prettierd", "prettier", stop_after_first = true },
     },
     -- Set default options
     default_format_opts = {
       lsp_format = "fallback",
     },
     -- Set up format-on-save
-    format_on_save = { timeout_ms = 500 },
+    format_on_save = { timeout_ms = 500, lsp_fallback = true },
     -- Customize formatters
     formatters = {
       shfmt = {
         append_args = { "-i", "2" },
+      },
+      xmlformat = {
+        command = "xmlformat",
+        args = { "--selfclose", "-" },
       },
     },
   },

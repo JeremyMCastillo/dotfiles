@@ -18,7 +18,7 @@ config.font_size = 12
 config.line_height = 1.1
 
 -- colors
-config.color_scheme = "MaterialDarker"
+config.color_scheme = "Gruvbox Dark (Gogh)"
 
 -- Appearance
 config.window_decorations = "RESIZE"

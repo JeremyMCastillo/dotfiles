@@ -41,4 +41,11 @@ end
 
 map("n", "<leader>wo", DeleteOtherBuffers, { desc = "Delete Other Buffers" })
 
+map("n", "<leader>lh", function()
+  vim.lsp.buf.hover()
+end, { desc = "LSP Hover" })
+map("n", "<leader>sh", function()
+  vim.lsp.buf.signature_help()
+end, { desc = "LSP Signature Help" })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

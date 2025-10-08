@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-local session_manager = require("wezterm-session-manager/session-manager")
 
 local config = wezterm.config_builder()
 
@@ -8,7 +7,6 @@ local config = wezterm.config_builder()
 wezterm.on("gui-startup", function(cmd)
 	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
 	window:gui_window():maximize()
-	session_manager.load_state(window)
 end)
 
 -- Leader key

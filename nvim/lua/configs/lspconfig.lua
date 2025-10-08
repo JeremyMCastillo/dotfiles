@@ -5,12 +5,16 @@ local servers = { "html", "cssls" }
 
 -- vim.lsp.config["omnisharp"] = {}
 vim.lsp.config["tsserver"] = {}
+vim.lsp.config["terraform-ls"] = {
+  filetypes = { "terraform", "tf" },
+}
 
 vim.lsp.enable(servers)
 vim.lsp.enable "lua_la"
 vim.lsp.enable "omnisharp"
 vim.lsp.enable "pyright"
 vim.lsp.enable "ts_ls"
+vim.lsp.enable "terraform-ls"
 --
 -- lspconfig.omnisharp.setup {}
 -- lspconfig.lua_ls.setup {}

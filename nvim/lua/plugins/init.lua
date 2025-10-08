@@ -30,6 +30,7 @@ return {
           "lua-language-server",
           "pyright",
           "tsserver",
+          "terraform-lsp",
         },
       }
     end,

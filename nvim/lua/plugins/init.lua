@@ -31,6 +31,7 @@ return {
           "pyright",
           "tsserver",
           "terraform-lsp",
+          "powershell-editor-services",
         },
       }
     end,

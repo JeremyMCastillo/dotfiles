@@ -35,3 +35,11 @@ require "autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- Set autoread
+vim.cmd [[
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+  autocmd FileChangedShellPost *
+    \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+]]
+vim.opt.autoread = true

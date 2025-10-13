@@ -13,7 +13,7 @@ end, { desc = "Copilot Accept", noremap = true, silent = true })
 
 map("t", "<C-n>", "<C-\\><C-n>", { desc = "Terminal Normal Mode" })
 
-map("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "Toggle Copilot Chat" })
+map({ "n", "v" }, "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "Toggle Copilot Chat" })
 
 map("n", "<leader>lg", function()
   vim.cmd "vsplit | terminal lazygit"
@@ -49,3 +49,7 @@ map("n", "<leader>sh", function()
 end, { desc = "LSP Signature Help" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+map("n", "<leader>k", function()
+  vim.diagnostic.open_float(nil, { focus = false })
+end, { desc = "Line Diagnostics" })

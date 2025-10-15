@@ -13,8 +13,6 @@ end, { desc = "Copilot Accept", noremap = true, silent = true })
 
 map("t", "<C-n>", "<C-\\><C-n>", { desc = "Terminal Normal Mode" })
 
-map({ "n", "v" }, "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "Toggle Copilot Chat" })
-
 map("n", "<leader>lg", function()
   vim.cmd "vsplit | terminal lazygit"
   vim.cmd "startinsert"
@@ -53,3 +51,17 @@ end, { desc = "LSP Signature Help" })
 map("n", "<leader>k", function()
   vim.diagnostic.open_float(nil, { focus = false })
 end, { desc = "Line Diagnostics" })
+
+map({ "n", "v", "i", "t" }, "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map({ "n", "v", "i", "t" }, "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map({ "n", "v", "i", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map({ "n", "v", "i", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
+-- Copilot chat
+map({ "n", "v" }, "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "Toggle Copilot Chat" })
+map("v", "<leader>ce", "<cmd>CopilotChatExplain<cr>", { desc = "Explain Selection" })
+map("v", "<leader>cr", "<cmd>CopilotChatReview<cr>", { desc = "Review Selection" })
+map("v", "<leader>cf", "<cmd>CopilotChatFix<cr>", { desc = "Fix It" })
+map("v", "<leader>co", "<cmd>CopilotChatOptimize<cr>", { desc = "Optimize Selection" })
+map("v", "<leader>cd", "<cmd>CopilotChatDocs<cr>", { desc = "Document Selection" })
+map("v", "<leader>ct", "<cmd>CopilotChatTests<cr>", { desc = "Generate Tests" })

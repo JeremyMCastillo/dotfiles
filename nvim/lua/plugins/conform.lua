@@ -28,6 +28,9 @@ return {
       html = { "prettierd", "prettier", stop_after_first = true },
       css = { "prettierd", "prettier", stop_after_first = true },
       xml = { "prettierd", "prettier", stop_after_first = true },
+      terraform = { "terraform_fmt" },
+      tf = { "terraform_fmt" },
+      tfvars = { "terraform_fmt" },
     },
     -- Set default options
     default_format_opts = {
@@ -43,6 +46,10 @@ return {
       xmlformat = {
         command = "xmlformat",
         args = { "--selfclose", "-" },
+      },
+      terraform_fmt = {
+        command = "terraform",
+        args = { "fmt", "-" },
       },
     },
   },

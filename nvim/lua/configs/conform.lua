@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     terraform = { "terraform_fmt" },
     tf = { "terraform_fmt" },
+    tfvars = { "terraform_fmt" },
     -- css = { "prettier" },
     -- html = { "prettier" },
   },

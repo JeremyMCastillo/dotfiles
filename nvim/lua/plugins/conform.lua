@@ -31,6 +31,7 @@ return {
       terraform = { "terraform_fmt" },
       tf = { "terraform_fmt" },
       tfvars = { "terraform_fmt" },
+      env = {},
     },
     -- Set default options
     default_format_opts = {

@@ -142,23 +142,6 @@ return {
     end,
   },
   {
-    "epwalsh/obsidian.nvim",
-    lazy = true,
-    version = "*",
-    ft = "markdown",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "notes",
-          path = "D:\\Documents\\Notes",
-        },
-      },
-    },
-  },
-  {
     "kylechui/nvim-surround",
     version = "^3.0.0",
     event = "VeryLazy",

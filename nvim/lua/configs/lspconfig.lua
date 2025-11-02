@@ -27,8 +27,7 @@ vim.lsp.config["yamlls"] = {
   },
 }
 
-local lspconfig = require "lspconfig"
-lspconfig.eslint.setup {
+vim.lsp.config["eslint"] = {
   cmd = { "eslint_d", "--stdin", "--stdin-filename", "%f" },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   settings = {
@@ -42,10 +41,10 @@ lspconfig.eslint.setup {
       command = "EslintFixAll",
     })
   end,
-  root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", "package.json", "eslintrc.json"),
+  root_dir = require("lspconfig").util.root_pattern(".eslintrc", ".eslintrc.js", "package.json", "eslintrc.json"),
 }
 
-lspconfig.ts_ls.setup {
+vim.lsp.config["ts_ls"] = {
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false

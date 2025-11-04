@@ -44,8 +44,6 @@ return {
       auto_install = true,
     },
     config = function()
-      local lspconfig = require "lspconfig"
-      lspconfig.tsserver.setup {}
       require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers {
         function(server_name) -- default handler (optional)
@@ -150,5 +148,18 @@ return {
         -- Configuration here, or leave empty to use defaults
       }
     end,
+  },
+  {
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
+    opts = {},
+    init = function()
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+    end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
   },
 }

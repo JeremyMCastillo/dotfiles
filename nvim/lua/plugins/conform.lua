@@ -38,7 +38,7 @@ return {
       tsx = { "eslint_d", "prettierd" },
     },
     -- Set up format-on-save
-    format_on_save = { timeout_ms = 5000, lsp_fallback = false },
+    format_on_save = { timeout_ms = 10000, lsp_fallback = false },
     -- Customize formatters
     formatters = {
       shfmt = {

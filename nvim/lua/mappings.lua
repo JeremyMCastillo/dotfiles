@@ -18,6 +18,11 @@ map("n", "<leader>lg", function()
   vim.cmd "startinsert"
 end, { desc = "LazyGit" })
 
+map("n", "<leader>oc", function()
+  vim.cmd "vsplit | terminal opencode"
+  vim.cmd "startinsert"
+end, { desc = "Opencode" })
+
 local function DeleteOtherBuffers()
   local current_buf = vim.api.nvim_get_current_buf()
   local current_tab = vim.api.nvim_get_current_tabpage()
@@ -72,3 +77,7 @@ map("n", "<leader>bn", "<cmd>DapNew<cr>", { desc = "Launch New Debug Session" })
 map("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
 map("n", "<leader>bo", "<cmd>DapStepOver<cr>", { desc = "Step Over" })
 map("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step Into" })
+
+map("n", "<leader>ca", function()
+  vim.lsp.buf.code_action()
+end, { desc = "Code Action Menu" })

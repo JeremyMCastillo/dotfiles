@@ -21,7 +21,10 @@ return {
     formatters_by_ft = {
       lua = { "lua_ls", "stylua" },
       python = { "isort", "black" },
-      javascript = { "prettierd", "prettier", stop_after_first = true },
+      javascript = { "eslint_d", "prettierd" },
+      typescript = { "eslint_d", "prettierd" },
+      typescriptreact = { "eslint_d", "prettierd" },
+      javascriptreact = { "eslint_d", "prettierd" },
       cs = { "csharpier" },
       sh = { "shfmt" },
       json = { "prettierd", "prettier", stop_after_first = true },
@@ -32,13 +35,10 @@ return {
       tf = { "terraform_fmt" },
       tfvars = { "terraform_fmt" },
       env = {},
-    },
-    -- Set default options
-    default_format_opts = {
-      lsp_format = "fallback",
+      tsx = { "eslint_d", "prettierd" },
     },
     -- Set up format-on-save
-    format_on_save = { timeout_ms = 500, lsp_fallback = true },
+    format_on_save = { timeout_ms = 10000, lsp_fallback = false },
     -- Customize formatters
     formatters = {
       shfmt = {

@@ -22,6 +22,10 @@ return {
         ui = {
           border = "rounded",
         },
+        registries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry",
+        },
         ensure_installed = {
           "black",
           "pylint",
@@ -161,5 +165,14 @@ return {
   {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
+  },
+  {
+    "seblyng/roslyn.nvim",
+    event = "VeryLazy",
+    ---@module 'roslyn.config'
+    ---@type RoslynNvimConfig
+    opts = {
+      -- your configuration comes here; leave empty for default settings
+    },
   },
 }

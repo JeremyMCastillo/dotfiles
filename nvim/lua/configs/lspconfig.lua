@@ -2,7 +2,6 @@ require("nvchad.configs.lspconfig").defaults()
 
 local servers = { "html", "cssls" }
 
--- vim.lsp.config["omnisharp"] = {}
 vim.lsp.config["tsserver"] = {}
 vim.lsp.config["gh_actions_ls"] = {}
 vim.lsp.config["terraform_lsp"] = {
@@ -67,7 +66,6 @@ vim.lsp.config["ts_ls"] = {
 
 vim.lsp.enable(servers)
 vim.lsp.enable "lua_la"
-vim.lsp.enable "omnisharp"
 vim.lsp.enable "pyright"
 vim.lsp.enable "ts_ls"
 vim.lsp.enable "terraform_lsp"

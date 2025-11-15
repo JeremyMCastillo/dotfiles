@@ -27,22 +27,36 @@ vim.lsp.config["yamlls"] = {
   },
 }
 
-vim.lsp.config["eslint"] = {
-  cmd = { "eslint_d", "--stdin", "--stdin-filename", "%f" },
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-  settings = {
-    format = { enable = true }, -- this will enable formatting on eslint
-    packageManager = "yarn",
-  },
+local base_on_attach = vim.lsp.config.eslint.on_attach
+vim.lsp.config("eslint", {
   on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
+    if not base_on_attach then
+      return
+    end
+
+    base_on_attach(client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
-      command = "EslintFixAll",
+      command = "LspEslintFixAll",
     })
   end,
-  root_dir = require("lspconfig").util.root_pattern(".eslintrc", ".eslintrc.js", "package.json", "eslintrc.json"),
-}
+})
+-- vim.lsp.config["eslint"] = {
+--   cmd = { "eslint_d", "--stdin", "--stdin-filename", "%f" },
+--   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+--   settings = {
+--     format = { enable = true }, -- this will enable formatting on eslint
+--     packageManager = "yarn",
+--   },
+--   on_attach = function(client, bufnr)
+--     client.server_capabilities.documentFormattingProvider = true
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       buffer = bufnr,
+--       command = "EslintFixAll",
+--     })
+--   end,
+--   root_dir = require("lspconfig").util.root_pattern(".eslintrc", ".eslintrc.js", "package.json", "eslintrc.json"),
+-- }
 
 vim.lsp.config["ts_ls"] = {
   on_attach = function(client, bufnr)

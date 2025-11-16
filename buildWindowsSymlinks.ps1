@@ -21,3 +21,19 @@ $Target = "$PSScriptRoot\.wezterm.lua"
 $Link = "$env:USERPROFILE\.wezterm.lua"
 Clean-Existing-Link -LinkPath $Link
 cmd /c "mklink /H $Link $Target"
+
+# whkd config 
+$Target = "$PSScriptRoot\.config\whkdrc"
+$Link = "$env:USERPROFILE\.config\whkdrc"
+Clean-Existing-Link -LinkPath $Link 
+cmd /c "mklink /H $Link $Target"
+
+# Komorebi config 
+$Target = "$PSScriptRoot\komorebi.json"
+$Link = "$env:USERPROFILE\komorebi.json"
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /H $Link $Target"
+$Target = "$PSScriptRoot\komorebi.bar.json"
+$Link = "$env:USERPROFILE\komorebi.bar.json"
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /H $Link $Target"

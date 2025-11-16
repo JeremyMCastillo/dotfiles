@@ -4,7 +4,7 @@
   "font_family": "JetBrains Mono",
   "theme": {
     "palette": "Base16",
-    "name": "gruvbox-material-dark-medium",
+    "name": "GruvboxDarkMedium",
     "accent": "Base0D"
   },
   "left_widgets": [

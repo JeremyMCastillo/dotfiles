@@ -19,7 +19,7 @@ config.font_size = 12
 config.line_height = 1.1
 
 -- colors
-config.color_scheme = "Gruvbox Dark (Gogh)"
+config.color_scheme = "Everblush"
 
 -- Appearance
 config.window_decorations = "RESIZE"

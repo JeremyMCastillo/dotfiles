@@ -13,15 +13,29 @@ return {
     end,
   },
   {
-    "mason-org/mason.nvim",
+    "nvim-treesitter/nvim-treesitter",
     opts = {
-      automatic_installation = true,
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "markdown",
+        "markdown_inline",
+        "c_sharp",
+        "razor",
+      },
     },
+  },
+  {
+    "mason-org/mason.nvim",
     config = function()
       require("mason").setup {
         ui = {
           border = "rounded",
         },
+        automatic_installation = true,
         registries = {
           "github:mason-org/mason-registry",
           "github:Crashdummyy/mason-registry",
@@ -36,6 +50,9 @@ return {
           "tsserver",
           "terraform-lsp",
           "powershell-editor-services",
+          "csharpier",
+          "roslyn",
+          "rzls",
         },
       }
     end,
@@ -92,20 +109,6 @@ return {
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
-        "markdown",
-        "markdown_inline",
-      },
-    },
-  },
   {
     "voldikss/vim-floaterm",
     lazy = false,
@@ -171,6 +174,7 @@ return {
     event = "VeryLazy",
     ---@module 'roslyn.config'
     ---@type RoslynNvimConfig
+    ft = { "cs", "razor" },
     opts = {
       -- your configuration comes here; leave empty for default settings
     },

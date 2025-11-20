@@ -2,6 +2,7 @@ require("nvchad.configs.lspconfig").defaults()
 
 local servers = { "html", "cssls" }
 
+vim.lsp.config["roslyn"] = {}
 vim.lsp.config["tsserver"] = {}
 vim.lsp.config["gh_actions_ls"] = {}
 vim.lsp.config["terraform_lsp"] = {
@@ -74,6 +75,7 @@ vim.lsp.enable "bashls"
 vim.lsp.enable "gh_actions_ls"
 vim.lsp.enable "yamlls"
 vim.lsp.enable "eslint"
+vim.lsp.enable "roslyn"
 --
 -- lspconfig.omnisharp.setup {}
 -- lspconfig.lua_ls.setup {}

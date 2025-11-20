@@ -31,5 +31,17 @@
         }
       ]
     }
+  ],
+  "ignore_rules": [
+    {
+      "kind": "Title",
+      "id": "Ueli",
+      "match_type": "Exact"
+    },
+    {
+      "kind": "Exe",
+      "id": "Ueli.exe",
+      "match_type": "Exact"
+    }
   ]
 }

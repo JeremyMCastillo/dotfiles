@@ -14,12 +14,41 @@ end)
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 
 -- Font Settings
-config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
+-- config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
+config.font = wezterm.font_with_fallback({
+	"JetBrainsMono Nerd Font",
+	"FiraCode Nerd Font",
+	"Symbols Nerd Font",
+})
 config.font_size = 12
 config.line_height = 1.1
 
 -- colors
 config.color_scheme = "Everblush"
+config.colors = {
+	ansi = {
+		"#232a2e", -- black
+		"#e57474", -- red
+		"#8ccf7e", -- green
+		"#e5c76b", -- yellow
+		"#67b0e8", -- blue
+		"#c47fd5", -- magenta
+		"#6cbfbf", -- cyan
+		"#b3b9b8", -- white
+	},
+	brights = {
+		"#68edcb", -- bright black (make this lighter for command params)
+		"#ef7e7e", -- bright red
+		"#93d493", -- bright green
+		"#f4d67a", -- bright yellow
+		"#71baf2", -- bright blue
+		"#ce89df", -- bright magenta
+		"#67cbe7", -- bright cyan
+		"#c7c7c7", -- bright white
+	},
+	selection_fg = "#232a2e", -- readable foreground for selection
+	selection_bg = "#f4d67a", -- bright yellow background for selection
+}
 
 -- Appearance
 config.window_decorations = "RESIZE"

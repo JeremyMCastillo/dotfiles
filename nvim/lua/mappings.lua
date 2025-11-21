@@ -78,6 +78,6 @@ map("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
 map("n", "<leader>bo", "<cmd>DapStepOver<cr>", { desc = "Step Over" })
 map("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step Into" })
 
-map("n", "<leader>ca", function()
+map({ "n", "v" }, "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { desc = "Code Action Menu" })

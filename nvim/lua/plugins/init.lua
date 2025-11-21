@@ -179,4 +179,9 @@ return {
       -- your configuration comes here; leave empty for default settings
     },
   },
+  {
+    "windwp/nvim-ts-autotag",
+    lazy = false,
+    ft = { "html", "razor", "cshtml", "xml", "jsx", "tsx" },
+  },
 }

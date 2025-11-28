@@ -184,4 +184,9 @@ return {
     lazy = false,
     ft = { "html", "razor", "cshtml", "xml", "jsx", "tsx" },
   },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
 }

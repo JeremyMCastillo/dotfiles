@@ -37,3 +37,9 @@ $Target = "$PSScriptRoot\komorebi.bar.json"
 $Link = "$env:USERPROFILE\komorebi.bar.json"
 Clean-Existing-Link -LinkPath $Link
 cmd /c "mklink /H $Link $Target"
+
+# Powershell profile
+$Target = "$PSScriptRoot\Microsoft.PowerShell_profile.ps1"
+$Link = "$profile" 
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /H $Link $Target"

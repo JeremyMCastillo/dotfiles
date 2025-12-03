@@ -184,4 +184,8 @@ return {
     lazy = false,
     ft = { "html", "razor", "cshtml", "xml", "jsx", "tsx" },
   },
+  {
+    "mfussenegger/nvim-dap",
+    event = "VeryLazy",
+  },
 }

@@ -187,5 +187,59 @@ return {
   {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
+    config = function()
+      -- .NET specific setup using `easy-dotnet`
+      require "configs.nvim-dap"
+      require("easy-dotnet.netcoredbg").register_dap_variables_viewer() -- special variables viewer specific for .NET
+    end,
+  },
+  { "nvim-neotest/nvim-nio" },
+  {
+    -- UI for debugging
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require "configs.nvim-dap-ui"
+    end,
+  },
+  {
+    "nvim-neotest/neotest",
+    requires = {
+      {
+        "Issafalcon/neotest-dotnet",
+      },
+    },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
+  {
+    "Issafalcon/neotest-dotnet",
+    lazy = false,
+    dependencies = {
+      "nvim-neotest/neotest",
+    },
+    -- lazy.nvim
+    {
+      "GustavEikaas/easy-dotnet.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+      config = function()
+        require("easy-dotnet").setup()
+        local dotnet = require "easy-dotnet"
+        dotnet.setup {
+          debugger = {
+            bin_path = "netcoredbg",
+          },
+        }
+      end,
+    },
   },
 }

@@ -5,6 +5,38 @@ return {
     opts = require "configs.conform",
   },
 
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        hidden = true,
+        file_ignore_patterns = { "node_modules", ".venv", "bin", "obj", "%.git/" },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+          find_command = {
+            "rg",
+            "--files",
+            "--hidden",
+            "--glob",
+            "!.git/",
+            "--glob",
+            "!node_modules/**",
+            "--glob",
+            "!.venv/**",
+            "--glob",
+            "!bin/**",
+            "--glob",
+            "!obj/**",
+            "--glob",
+            "!**/Migrations/**",
+          },
+        },
+      },
+    },
+  },
+
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",

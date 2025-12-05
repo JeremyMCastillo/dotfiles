@@ -177,6 +177,14 @@ return {
     ft = { "cs", "razor" },
     opts = {
       -- your configuration comes here; leave empty for default settings
+      choose_target = function(sln)
+        return vim.iter(sln):find(function(item)
+          if string.match(item, "FullNliven.sln") then
+            return item
+          end
+        end)
+      end,
+      lock_target = true,
     },
   },
   {
@@ -240,6 +248,20 @@ return {
           },
         }
       end,
+    },
+  },
+  {
+    "xentropic-dev/explorer.dotnet.nvim",
+    config = function()
+      require("dotnet_explorer").setup {
+        renderer = {
+          width = 30,
+          side = "right",
+        },
+      }
+    end,
+    keys = {
+      { "<leader>de", "<cmd>ToggleSolutionExplorer<cr>", desc = "Toggle .NET Explorer" },
     },
   },
 }

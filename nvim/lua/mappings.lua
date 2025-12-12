@@ -82,3 +82,9 @@ map("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step Into" })
 map({ "n", "v" }, "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { desc = "Code Action Menu" })
+
+map("n", "<leader>fr", function()
+  require("telescope.builtin").lsp_references {
+    include_declaration = false,
+  }
+end, { desc = "LSP References (Filtered)" })

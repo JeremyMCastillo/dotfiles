@@ -8,3 +8,9 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.lsp.codelens.refresh { bufnr = vim.api.nvim_get_current_buf() }
+  end,
+})

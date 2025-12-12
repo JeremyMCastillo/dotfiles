@@ -201,24 +201,40 @@ return {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
   },
-  {
-    "seblyng/roslyn.nvim",
-    event = "VeryLazy",
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
-    ft = { "cs", "razor" },
-    opts = {
-      -- your configuration comes here; leave empty for default settings
-      choose_target = function(sln)
-        return vim.iter(sln):find(function(item)
-          if string.match(item, "FullNliven.sln") then
-            return item
-          end
-        end)
-      end,
-      lock_target = true,
-    },
-  },
+  -- {
+  --   "seblyng/roslyn.nvim",
+  --   event = "VeryLazy",
+  --   ---@module 'roslyn.config'
+  --   ---@type RoslynNvimConfig
+  --   ft = { "cs", "razor", "cshtml" },
+  --   opts = {
+  --     -- your configuration comes here; leave empty for default settings
+  --     choose_target = function(sln)
+  --       return vim.iter(sln):find(function(item)
+  --         if string.match(item, "FullNliven.sln") then
+  --           return item
+  --         end
+  --       end)
+  --     end,
+  --     lock_target = true,
+  --     config = {
+  --       indexing = {
+  --         enabled = true,
+  --         parallel = true,
+  --         indexSolution = true,
+  --         indexReferences = true,
+  --         indexSearchPatterns = true,
+  --       },
+  --       analyzers = {
+  --         enabled = true,
+  --         enableImportCompletion = true,
+  --         enableEditorConfigSupport = true,
+  --         enableRoslynAnalyzers = true,
+  --         enableAnalyzersSupport = true,
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "windwp/nvim-ts-autotag",
     lazy = false,
@@ -270,15 +286,24 @@ return {
     -- lazy.nvim
     {
       "GustavEikaas/easy-dotnet.nvim",
+      ft = { "cs", "razor", "cshtml" },
+      event = "VeryLazy",
       dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
       config = function()
-        require("easy-dotnet").setup()
         local dotnet = require "easy-dotnet"
         dotnet.setup {
           debugger = {
             bin_path = "netcoredbg",
           },
         }
+
+        local defaultManager = require "easy-dotnet.default-manager"
+        local solutionPath = vim.fn.getcwd() .. "/FullNliven.sln"
+        local stat = vim.uv.fs_stat(solutionPath)
+        if stat then
+          print "Setting default solution to FullNliven.sln"
+          defaultManager.set_default_solution(nil, solutionPath)
+        end
       end,
     },
   },
@@ -295,5 +320,9 @@ return {
     keys = {
       { "<leader>de", "<cmd>ToggleSolutionExplorer<cr>", desc = "Toggle .NET Explorer" },
     },
+  },
+  {
+    "RRethy/vim-illuminate",
+    event = "VeryLazy",
   },
 }

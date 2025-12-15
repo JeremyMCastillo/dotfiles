@@ -5,6 +5,38 @@ return {
     opts = require "configs.conform",
   },
 
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        hidden = true,
+        file_ignore_patterns = { "node_modules", ".venv", "bin", "obj", "%.git/" },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+          find_command = {
+            "rg",
+            "--files",
+            "--hidden",
+            "--glob",
+            "!.git/",
+            "--glob",
+            "!node_modules/**",
+            "--glob",
+            "!.venv/**",
+            "--glob",
+            "!bin/**",
+            "--glob",
+            "!obj/**",
+            "--glob",
+            "!**/Migrations/**",
+          },
+        },
+      },
+    },
+  },
+
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
@@ -169,24 +201,128 @@ return {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
   },
-  {
-    "seblyng/roslyn.nvim",
-    event = "VeryLazy",
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
-    ft = { "cs", "razor" },
-    opts = {
-      -- your configuration comes here; leave empty for default settings
-    },
-  },
+  -- {
+  --   "seblyng/roslyn.nvim",
+  --   event = "VeryLazy",
+  --   ---@module 'roslyn.config'
+  --   ---@type RoslynNvimConfig
+  --   ft = { "cs", "razor", "cshtml" },
+  --   opts = {
+  --     -- your configuration comes here; leave empty for default settings
+  --     choose_target = function(sln)
+  --       return vim.iter(sln):find(function(item)
+  --         if string.match(item, "FullNliven.sln") then
+  --           return item
+  --         end
+  --       end)
+  --     end,
+  --     lock_target = true,
+  --     config = {
+  --       indexing = {
+  --         enabled = true,
+  --         parallel = true,
+  --         indexSolution = true,
+  --         indexReferences = true,
+  --         indexSearchPatterns = true,
+  --       },
+  --       analyzers = {
+  --         enabled = true,
+  --         enableImportCompletion = true,
+  --         enableEditorConfigSupport = true,
+  --         enableRoslynAnalyzers = true,
+  --         enableAnalyzersSupport = true,
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "windwp/nvim-ts-autotag",
     lazy = false,
     ft = { "html", "razor", "cshtml", "xml", "jsx", "tsx" },
   },
   {
-    "chentoast/marks.nvim",
+    "mfussenegger/nvim-dap",
     event = "VeryLazy",
-    opts = {},
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
+    config = function()
+      -- .NET specific setup using `easy-dotnet`
+      require "configs.nvim-dap"
+      require("easy-dotnet.netcoredbg").register_dap_variables_viewer() -- special variables viewer specific for .NET
+    end,
+  },
+  { "nvim-neotest/nvim-nio" },
+  {
+    -- UI for debugging
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require "configs.nvim-dap-ui"
+    end,
+  },
+  {
+    "nvim-neotest/neotest",
+    requires = {
+      {
+        "Issafalcon/neotest-dotnet",
+      },
+    },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
+  {
+    "Issafalcon/neotest-dotnet",
+    lazy = false,
+    dependencies = {
+      "nvim-neotest/neotest",
+    },
+    -- lazy.nvim
+    {
+      "GustavEikaas/easy-dotnet.nvim",
+      ft = { "cs", "razor", "cshtml" },
+      event = "VeryLazy",
+      dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+      config = function()
+        local dotnet = require "easy-dotnet"
+        dotnet.setup {
+          debugger = {
+            bin_path = "netcoredbg",
+          },
+        }
+
+        local defaultManager = require "easy-dotnet.default-manager"
+        local solutionPath = vim.fn.getcwd() .. "/FullNliven.sln"
+        local stat = vim.uv.fs_stat(solutionPath)
+        if stat then
+          print "Setting default solution to FullNliven.sln"
+          defaultManager.set_default_solution(nil, solutionPath)
+        end
+      end,
+    },
+  },
+  {
+    "xentropic-dev/explorer.dotnet.nvim",
+    config = function()
+      require("dotnet_explorer").setup {
+        renderer = {
+          width = 30,
+          side = "right",
+        },
+      }
+    end,
+    keys = {
+      { "<leader>de", "<cmd>ToggleSolutionExplorer<cr>", desc = "Toggle .NET Explorer" },
+    },
+  },
+  {
+    "RRethy/vim-illuminate",
+    event = "VeryLazy",
   },
 }

@@ -44,3 +44,9 @@ vim.cmd [[
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 ]]
 vim.opt.autoread = true
+
+require("neotest").setup {
+  adapters = {
+    require "neotest-dotnet",
+  },
+}

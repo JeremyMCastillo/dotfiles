@@ -2,7 +2,28 @@ require("nvchad.configs.lspconfig").defaults()
 
 local servers = { "html", "cssls" }
 
-vim.lsp.config["roslyn"] = {}
+-- Dotnet
+-- vim.lsp.config["roslyn"] = {
+--   on_attach = function(client, bufnr)
+--     vim.lsp.codelens.refresh { bufnr = bufnr }
+--   end,
+--   filetypes = { "cs", "razor", "cshtml" },
+--   settings = {
+--     ["csharp|background_analysis"] = {
+--       dotnet_analyzer_diagnostics_scope = "fullSolution",
+--       dotnet_compiler_diagnostics_scope = "fullSolution",
+--     },
+--     ["csharp|code_lens"] = {
+--       dotnet_enable_references_code_lens = true,
+--       dotnet_enable_tests_code_lens = true,
+--     },
+--     ["csharp|completion"] = {
+--       dotnet_show_completion_items_from_unimported_namespaces = true,
+--       dotnet_show_name_completion_suggestions = true,
+--     },
+--   },
+-- }
+
 vim.lsp.config["tsserver"] = {}
 vim.lsp.config["gh_actions_ls"] = {}
 vim.lsp.config["terraform_lsp"] = {
@@ -20,8 +41,6 @@ vim.lsp.config["yamlls"] = {
     yaml = {
       schemas = {
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-        ["../path/relative/to/file.yml"] = "/.github/workflows/*",
-        ["/path/from/root/of/project"] = "/.github/workflows/*",
       },
     },
   },
@@ -41,22 +60,6 @@ vim.lsp.config("eslint", {
     })
   end,
 })
--- vim.lsp.config["eslint"] = {
---   cmd = { "eslint_d", "--stdin", "--stdin-filename", "%f" },
---   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
---   settings = {
---     format = { enable = true }, -- this will enable formatting on eslint
---     packageManager = "yarn",
---   },
---   on_attach = function(client, bufnr)
---     client.server_capabilities.documentFormattingProvider = true
---     vim.api.nvim_create_autocmd("BufWritePre", {
---       buffer = bufnr,
---       command = "EslintFixAll",
---     })
---   end,
---   root_dir = require("lspconfig").util.root_pattern(".eslintrc", ".eslintrc.js", "package.json", "eslintrc.json"),
--- }
 
 vim.lsp.config["ts_ls"] = {
   on_attach = function(client, bufnr)
@@ -75,10 +78,6 @@ vim.lsp.enable "bashls"
 vim.lsp.enable "gh_actions_ls"
 vim.lsp.enable "yamlls"
 vim.lsp.enable "eslint"
---
--- lspconfig.omnisharp.setup {}
--- lspconfig.lua_ls.setup {}
--- lspconfig.pyright.setup {}
--- lspconfig.tsserver.setup {}
+-- vim.lsp.enable "roslyn"
 
 -- read :h vim.lsp.config for changing options of lsp servers

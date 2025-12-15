@@ -74,6 +74,7 @@ map("v", "<leader>ct", "<cmd>CopilotChatTests<cr>", { desc = "Generate Tests" })
 -- Debugging
 map("n", "<leader>bb", "<cmd>DapToggleBreakpoint<cr>", { desc = "Toggle Breakpoint" })
 map("n", "<leader>bn", "<cmd>DapNew<cr>", { desc = "Launch New Debug Session" })
+map("n", "<leader>bq", "<cmd>DapTerminate<cr>", { desc = "Terminate Debug Session" })
 map("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
 map("n", "<leader>bo", "<cmd>DapStepOver<cr>", { desc = "Step Over" })
 map("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step Into" })
@@ -81,3 +82,9 @@ map("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step Into" })
 map({ "n", "v" }, "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { desc = "Code Action Menu" })
+
+map("n", "<leader>fr", function()
+  require("telescope.builtin").lsp_references {
+    include_declaration = false,
+  }
+end, { desc = "LSP References (Filtered)" })

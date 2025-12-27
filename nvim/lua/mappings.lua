@@ -14,7 +14,9 @@ end, { desc = "Copilot Accept", noremap = true, silent = true })
 map("t", "<C-n>", "<C-\\><C-n>", { desc = "Terminal Normal Mode" })
 
 map("n", "<leader>lg", function()
-  vim.cmd "vsplit | terminal lazygit"
+  local total_cols = vim.o.columns
+  local split_size = math.floor(total_cols * 0.7)
+  vim.cmd("vsplit | vertical resize " .. split_size .. " | terminal lazygit")
   vim.cmd "startinsert"
 end, { desc = "LazyGit" })
 

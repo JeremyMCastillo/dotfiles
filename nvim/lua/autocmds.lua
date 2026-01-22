@@ -14,3 +14,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.lsp.codelens.refresh { bufnr = vim.api.nvim_get_current_buf() }
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { ".env", ".env*", "*.env", "*.env.*" },
+  command = "setf dotenv",
+})

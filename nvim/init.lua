@@ -3,6 +3,16 @@ vim.g.mapleader = " "
 vim.opt.conceallevel = 1
 vim.opt.scrolloff = 5
 
+vim.opt.sessionoptions = {
+  "buffers",
+  "curdir",
+  "folds",
+  "help",
+  "tabpages",
+  "terminal",
+  "globals",
+}
+
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -51,3 +61,4 @@ require("neotest").setup {
     require "neotest-dotnet",
   },
 }
+

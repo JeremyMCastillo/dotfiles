@@ -90,3 +90,6 @@ map("n", "<leader>fr", function()
     include_declaration = false,
   }
 end, { desc = "LSP References (Filtered)" })
+
+map("n", "<leader>ss", "<cmd>mksession! .nvim/session.vim<cr>", { desc = "Save Session" })
+map("n", "<leader>sl", "<cmd>source .nvim/session.vim<cr>", { desc = "Load Session" })

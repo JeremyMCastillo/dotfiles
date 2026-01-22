@@ -34,7 +34,7 @@ return {
       terraform = { "terraform_fmt" },
       tf = { "terraform_fmt" },
       tfvars = { "terraform_fmt" },
-      env = {},
+      dotenv = {},
       tsx = { "eslint_d", "prettierd" },
     },
     -- Set up format-on-save

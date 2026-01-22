@@ -4,7 +4,7 @@ local options = {
     terraform = { "terraform_fmt" },
     tf = { "terraform_fmt" },
     tfvars = { "terraform_fmt" },
-    env = {},
+    dotenv = {},
     -- css = { "prettier" },
     -- html = { "prettier" },
   },

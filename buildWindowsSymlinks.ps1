@@ -43,3 +43,7 @@ $Target = "$PSScriptRoot\Microsoft.PowerShell_profile.ps1"
 $Link = "$profile" 
 Clean-Existing-Link -LinkPath $Link
 cmd /c "mklink /H $Link $Target"
+$Target = "$PSScriptRoot\powershell\settings.json"
+$Link = "C:\Users\jcast\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /H $Link $Target"

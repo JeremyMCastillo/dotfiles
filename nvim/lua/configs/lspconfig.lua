@@ -26,6 +26,15 @@ local servers = { "html", "cssls" }
 
 vim.lsp.config["tsserver"] = {}
 vim.lsp.config["gh_actions_ls"] = {}
+vim.lsp.config["rust_analyzer"] = {
+  settings = {
+    ["rust-analyzer"] = {
+      diagnostics = {
+        enable = false,
+      },
+    },
+  },
+}
 vim.lsp.config["terraform_lsp"] = {
   filetypes = { "tf", "terraform", "tfvars" },
 }
@@ -78,6 +87,7 @@ vim.lsp.enable "bashls"
 vim.lsp.enable "gh_actions_ls"
 vim.lsp.enable "yamlls"
 vim.lsp.enable "eslint"
+vim.lsp.enable "rust_analyzer"
 -- vim.lsp.enable "roslyn"
 
 -- read :h vim.lsp.config for changing options of lsp servers

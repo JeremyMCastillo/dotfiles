@@ -93,3 +93,7 @@ end, { desc = "LSP References (Filtered)" })
 
 map("n", "<leader>ss", "<cmd>mksession! .nvim/session.vim<cr>", { desc = "Save Session" })
 map("n", "<leader>sl", "<cmd>source .nvim/session.vim<cr>", { desc = "Load Session" })
+map("n", "<leader>qf", function()
+  vim.diagnostic.setqflist()
+  vim.cmd "copen"
+end, { desc = "Diagnostics to Quickfix" })

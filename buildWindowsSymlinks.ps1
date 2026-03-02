@@ -40,10 +40,21 @@ cmd /c "mklink /H $Link $Target"
 
 # Powershell profile
 $Target = "$PSScriptRoot\Microsoft.PowerShell_profile.ps1"
-$Link = "$profile" 
+$Link = "$profile"
 Clean-Existing-Link -LinkPath $Link
 cmd /c "mklink /H $Link $Target"
 $Target = "$PSScriptRoot\powershell\settings.json"
 $Link = "C:\Users\jcast\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Clean-Existing-Link -LinkPath $Link
 cmd /c "mklink /H $Link $Target"
+
+# Claude Code config
+$Target = "$PSScriptRoot\.claude\settings.json"
+$Link = "$env:USERPROFILE\.claude\settings.json"
+if (-not (Test-Path "$env:USERPROFILE\.claude")) { New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude" | Out-Null }
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /H $Link $Target"
+$Target = "$PSScriptRoot\.claude\skills"
+$Link = "$env:USERPROFILE\.claude\skills"
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /J $Link $Target"

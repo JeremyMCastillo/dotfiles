@@ -48,6 +48,13 @@ $Link = "C:\Users\jcast\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3
 Clean-Existing-Link -LinkPath $Link
 cmd /c "mklink /H $Link $Target"
 
+# Lazygit config
+$Target = "$PSScriptRoot\lazygit\config.yml"
+$Link = "$env:LOCALAPPDATA\lazygit\config.yml"
+if (-not (Test-Path "$env:LOCALAPPDATA\lazygit")) { New-Item -ItemType Directory -Path "$env:LOCALAPPDATA\lazygit" | Out-Null }
+Clean-Existing-Link -LinkPath $Link
+cmd /c "mklink /H $Link $Target"
+
 # Claude Code config
 $Target = "$PSScriptRoot\.claude\settings.json"
 $Link = "$env:USERPROFILE\.claude\settings.json"

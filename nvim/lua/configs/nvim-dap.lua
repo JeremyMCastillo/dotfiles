@@ -1,6 +1,11 @@
 local dap = require "dap"
 
-local mason_path = vim.fn.stdpath "data" .. "/mason/packages/netcoredbg/netcoredbg.exe"
+local is_windows = vim.loop.os_uname().version:match "Windows"
+local mason_path = vim.fn.stdpath "data"
+  .. (
+    is_windows and "\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg.exe"
+    or "/mason/packages/netcoredbg/netcoredbg"
+  )
 
 local netcoredbg_adapter = {
   type = "executable",
@@ -8,6 +13,13 @@ local netcoredbg_adapter = {
   args = { "--interpreter=vscode" },
 }
 
+vim.api.nvim_set_hl(0, "DapBreakpointLine", { bg = "#51202A" }) -- deep red
+vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#51412A" }) -- deep yellow
+
+vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "DapBreakpointLine", numhl = "" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "🟨", texthl = "", linehl = "DapBreakpointLine", numhl = "" })
+vim.fn.sign_define("DapBreakpointRejected", { text = "⛔", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = "⭐", texthl = "", linehl = "DapStoppedLine", numhl = "" })
 dap.adapters.netcoredbg = netcoredbg_adapter -- needed for normal debugging
 dap.adapters.coreclr = netcoredbg_adapter -- needed for unit test debugging
 

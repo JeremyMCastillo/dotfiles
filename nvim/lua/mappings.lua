@@ -85,11 +85,7 @@ map({ "n", "v" }, "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { desc = "Code Action Menu" })
 
-map("n", "<leader>fr", function()
-  require("telescope.builtin").lsp_references {
-    include_declaration = false,
-  }
-end, { desc = "LSP References (Filtered)" })
+map("n", "<leader>fr", "<cmd>Telescope resume<cr>", { desc = "Resume Last Search" })
 
 map("n", "<leader>ss", "<cmd>mksession! .nvim/session.vim<cr>", { desc = "Save Session" })
 map("n", "<leader>sl", "<cmd>source .nvim/session.vim<cr>", { desc = "Load Session" })

@@ -52,6 +52,11 @@ return {
         command = "terraform",
         args = { "fmt", "-" },
       },
+      csharpier = {
+        command = "csharpier",
+        args = { "format", "--write-stdout" },
+        stdin = true,
+      },
     },
   },
   init = function()

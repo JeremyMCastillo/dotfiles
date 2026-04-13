@@ -1,0 +1,11 @@
+os:
+  edit: 'nvim --server %NVIM% --remote "{{filename}}"'
+  editAtLine: 'nvim --server %NVIM% --remote "{{filename}}" && nvim --server %NVIM% --remote-send ":{{line}}<CR>"'
+  editAtLineAndWait: 'nvim --server %NVIM% --remote-wait "{{filename}}" && nvim --server %NVIM% --remote-send ":{{line}}<CR>"'
+  openDirInEditor: 'nvim --server %NVIM% --remote "{{dir}}"'
+
+customCommands:
+  - key: "o"
+    context: "files"
+    command: 'nvim --server %NVIM% --remote "{{.SelectedFile.Name}}"'
+    description: "Open file in neovim"

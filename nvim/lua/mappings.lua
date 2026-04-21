@@ -81,6 +81,12 @@ map("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
 map("n", "<leader>bo", "<cmd>DapStepOver<cr>", { desc = "Step Over" })
 map("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step Into" })
 
+-- Git
+map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview Git Hunk" })
+map("n", "<leader>gb", "<cmd>Gitsigns blame_line<cr>", { desc = "Blame Line" })
+map("n", "<leader>gn", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next Git Hunk" })
+map("n", "<leader>gN", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Previous Git Hunk" })
+
 map({ "n", "v" }, "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { desc = "Code Action Menu" })

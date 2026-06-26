@@ -3,26 +3,28 @@ require("nvchad.configs.lspconfig").defaults()
 local servers = { "html", "cssls" }
 
 -- Dotnet
--- vim.lsp.config["roslyn"] = {
---   on_attach = function(client, bufnr)
---     vim.lsp.codelens.refresh { bufnr = bufnr }
---   end,
---   filetypes = { "cs", "razor", "cshtml" },
---   settings = {
---     ["csharp|background_analysis"] = {
---       dotnet_analyzer_diagnostics_scope = "fullSolution",
---       dotnet_compiler_diagnostics_scope = "fullSolution",
---     },
---     ["csharp|code_lens"] = {
---       dotnet_enable_references_code_lens = true,
---       dotnet_enable_tests_code_lens = true,
---     },
---     ["csharp|completion"] = {
---       dotnet_show_completion_items_from_unimported_namespaces = true,
---       dotnet_show_name_completion_suggestions = true,
---     },
---   },
--- }
+-- openFiles scope: only analyze projects containing open files, not the entire solution.
+-- fullSolution scope causes massive startup lag on large solutions like nLiven.
+vim.lsp.config["roslyn"] = {
+  on_attach = function(client, bufnr)
+    vim.lsp.codelens.refresh { bufnr = bufnr }
+  end,
+  filetypes = { "cs", "razor", "cshtml" },
+  settings = {
+    ["csharp|background_analysis"] = {
+      dotnet_analyzer_diagnostics_scope = "openFiles",
+      dotnet_compiler_diagnostics_scope = "openFiles",
+    },
+    ["csharp|code_lens"] = {
+      dotnet_enable_references_code_lens = true,
+      dotnet_enable_tests_code_lens = true,
+    },
+    ["csharp|completion"] = {
+      dotnet_show_completion_items_from_unimported_namespaces = true,
+      dotnet_show_name_completion_suggestions = true,
+    },
+  },
+}
 
 vim.lsp.config["tsserver"] = {}
 vim.lsp.config["gh_actions_ls"] = {}
@@ -88,6 +90,28 @@ vim.lsp.enable "gh_actions_ls"
 vim.lsp.enable "yamlls"
 vim.lsp.enable "eslint"
 vim.lsp.enable "rust_analyzer"
--- vim.lsp.enable "roslyn"
+vim.lsp.enable "roslyn"
+
+-- Pre-start Roslyn when Neovim opens in a .NET project directory.
+-- This mirrors VS Code's behavior of starting the language server immediately
+-- on workspace open, rather than waiting for the first .cs file to be opened.
+-- A named scratch buffer is used so root_dir detection (which searches upward
+-- for a .sln file) has a real path to work from.
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    local sln_files = vim.fn.glob(vim.fn.getcwd() .. "/*.sln", false, true)
+    if #sln_files == 0 then return end
+    -- Defer so all plugin FileType autocmds (including vim.lsp.enable) are registered
+    vim.defer_fn(function()
+      local bufnr = vim.api.nvim_create_buf(false, true)
+      vim.api.nvim_buf_set_name(bufnr, vim.fn.getcwd() .. "/__roslyn_warmup__.cs")
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.bo.filetype = "cs"
+      end)
+      vim.notify("Roslyn LSP warming up in background", vim.log.levels.INFO, { title = "dotnet" })
+    end, 500)
+  end,
+})
 
 -- read :h vim.lsp.config for changing options of lsp servers

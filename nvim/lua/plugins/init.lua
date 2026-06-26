@@ -305,7 +305,6 @@ return {
     {
       "GustavEikaas/easy-dotnet.nvim",
       ft = { "cs", "razor", "cshtml" },
-      event = "VeryLazy",
       dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
       config = function()
         local dotnet = require "easy-dotnet"
